@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@layer components {
+  body {
+    @apply bg-black;
+  }
+
+  #analog svg {
+    @apply size-full;
+  }
+
+  #analog .bezel {
+    @apply fill-gray-900 stroke-gray-800 stroke-2;
+  }
+
+  #analog .bezel-triangle {
+    @apply fill-gray-500;
+  }
+
+  #analog .rehaut {
+    @apply fill-black stroke-gray-800 stroke-2;
+  }
+
+  #analog .dial {
+    @apply fill-gray-950 stroke-gray-800 stroke-2;
+  }
+
+  #analog .second-hand {
+    @apply fill-black stroke-2 stroke-white;
+  }
+
+  #analog .minute-hand {
+    @apply fill-gray-500 stroke-1 stroke-black;
+  }
+
+  #analog .hour-hand {
+    @apply fill-gray-500 stroke-1 stroke-black;
+  }
+
+  #analog .utc-hand {
+    @apply fill-black stroke-2 stroke-rose-400;
+  }
+
+  #analog .hands-cover {
+    @apply fill-gray-400 stroke-1 stroke-black;
+  }
+
+  #analog .second-tick {
+    @apply stroke-2 stroke-gray-800;
+  }
+
+  #analog .hour-tick {
+    @apply stroke-8 stroke-indigo-500;
+  }
+
+  #analog .second-label {
+    @apply fill-gray-500 text-xs font-light;
+  }
+
+  #analog .hour-label {
+    @apply fill-gray-200 text-4xl font-extrabold;
+  }
+
+  #analog .utc-hour-label {
+    @apply fill-gray-300 text-xl font-semibold;
+  }
+
+  #analog .utc-hour-tick {
+    @apply fill-gray-600;
+  }
+}
