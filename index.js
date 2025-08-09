@@ -1,5 +1,12 @@
 let now = new Date()
 
+// Sets the refresh rate for updating `now`.
+// A refresh rate of 500 means the clock will be accurate within +/- a half second.
+// A rate less than 1000 does not increase the tick frequency of the clock;
+// the second hand will still move once per second, but it increases the frequency
+// with which the clock syncs its local time with system time, making it more accurate.
+const refreshRate = 250 // milliseconds
+
 const tzName = date => {
   return Intl.DateTimeFormat("default", { timeZoneName: "long" }).formatToParts(date).find(part => part.type === "timeZoneName").value
 }
@@ -436,6 +443,6 @@ function ready() {
   const interval = setInterval(() => {
     updateData()
     moveHands()
-  }, 1000)
+  }, refreshRate)
 }
 ready()
