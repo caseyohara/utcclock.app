@@ -152,10 +152,11 @@ const bezelTriangle = {
 function ready() {
   function updateData() {
     now = new Date()
-    handData[0].value = now.getUTCHours() + now.getUTCMinutes() / 60
-    handData[1].value = (now.getHours() % 12) + now.getMinutes() / 60
-    handData[2].value = now.getMinutes()
-    handData[3].value = now.getSeconds()
+    dateData[0].value = now.getDate()
+    timeData[0].value = now.getUTCHours() + now.getUTCMinutes() / 60
+    timeData[1].value = (now.getHours() % 12) + now.getMinutes() / 60
+    timeData[2].value = now.getMinutes()
+    timeData[3].value = now.getSeconds()
   }
 
   const vb = 512, // viewBox w & h
@@ -179,6 +180,8 @@ function ready() {
     hourLabelYOffset = 3,
     utcHourLabelRadius = bezelRadius - 28,
     utcHourLabelYOffset = 1.5,
+    dateWindowSize = 32,
+    dateWindowPosition = 82,
     radians = Math.PI / 180
 
   const analog = d3.select("#analog")
@@ -200,7 +203,7 @@ function ready() {
     .range([0, 360])
     .domain([0, 60])
 
-  const handData = [
+  const timeData = [
     {
       type: "utc",
       value: 0,
@@ -224,6 +227,13 @@ function ready() {
       value: 0,
       length: -secondHandLength,
       scale: sixty
+    }
+  ]
+
+  const dateData = [
+    {
+      type: "day",
+      value: 0
     }
   ]
 
@@ -356,12 +366,37 @@ function ready() {
       .attr("d", d3.symbol().type(bezelTriangle).size(480))
       .attr("transform", `translate(0, -${bezelRadius - 12})`)
 
+
+    // Add date window
+    const dateWindow = clock.append("g").attr("id", "date-window")
+
+    dateWindow
+      .append("rect")
+      .attr("x", dateWindowSize / -2)
+      .attr("y", dateWindowPosition)
+      .attr("width", dateWindowSize)
+      .attr("height", dateWindowSize)
+
+    dateWindow
+      .selectAll(".date-window-label")
+      .data(dateData)
+      .enter()
+      .append("text")
+      .attr("class", "date-window-label")
+      .attr("text-anchor", "middle")
+      .attr("alignment-baseline", "middle")
+      .attr("x", 0)
+      .attr("y", dateWindowPosition + (dateWindowSize/2) + 1)
+      .attr("width", dateWindowSize)
+      .attr("height", dateWindowSize)
+      .text(d => d.value)
+
     const hands = clock.append("g").attr("id", "clock-hands")
 
     // Add hand groups
     hands
       .selectAll("g.hand-group")
-      .data(handData)
+      .data(timeData)
       .enter()
       .append("g")
       .attr("class", d => `hand-group hand-group-${d.type}`)
@@ -429,7 +464,7 @@ function ready() {
   function moveHands() {
     d3.select("#clock-hands")
       .selectAll("g.hand-group")
-      .data(handData)
+      .data(timeData)
       .transition()
       .ease(d3.easeElastic.period(0.5))
       .attr("transform", d => `rotate(${d.scale(d.value)})`)

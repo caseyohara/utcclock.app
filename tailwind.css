@@ -68,4 +68,12 @@
   #analog .utc-hour-tick {
     @apply fill-gray-600;
   }
+
+  #analog #date-window rect {
+    @apply fill-black stroke-2 stroke-gray-800;
+  }
+
+  #analog #date-window text {
+    @apply font-bold fill-gray-400;
+  }
 }

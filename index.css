@@ -23,6 +23,8 @@
     --container-3xl: 48rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
     --text-3xl: 1.875rem;
@@ -243,6 +245,10 @@
     font-size: var(--text-3xl);
     line-height: var(--tw-leading, var(--text-3xl--line-height));
   }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
   .text-xs {
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
@@ -391,6 +397,16 @@
   }
   #analog .utc-hour-tick {
     fill: var(--color-gray-600);
+  }
+  #analog #date-window rect {
+    fill: var(--color-black);
+    stroke: var(--color-gray-800);
+    stroke-width: 2;
+  }
+  #analog #date-window text {
+    fill: var(--color-gray-400);
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
   }
 }
 @property --tw-rotate-x {
