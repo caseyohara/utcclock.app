@@ -1,5 +1,6 @@
 {
   "name": "UTC Clock",
+  "short_name": "UTC Clock",
   "icons": [
     {
       "src": "/icon.png",
@@ -17,7 +18,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
-  "description": "UTC Clock.",
+  "description": "A simple reference clock that shows the time in your local timezone and UTC, perfect for setting the time on your GMT watch.",
   "theme_color": "black",
   "background_color": "black"
 }
