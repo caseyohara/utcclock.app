@@ -443,7 +443,7 @@ function ready() {
     const localZone = tzName(now)
     const localTime = [now.getHours(), now.getMinutes(), now.getSeconds()].map(n => n.toString().padStart(2, "0")).join(":")
     const localWeekDay = now.toLocaleDateString("en-US", { weekday: "short" })
-    const localDateStamp = now.toISOString().slice(0, 10)
+    const localDateStamp = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, "0"), String(now.getDate()).padStart(2, "0")].join("-")
     const localDate = `${localWeekDay} ${localDateStamp}`
 
     const utcZone = "UTC"
