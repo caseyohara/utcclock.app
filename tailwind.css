@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source not "d3.v7.min.js";
 
 @layer components {
   body {

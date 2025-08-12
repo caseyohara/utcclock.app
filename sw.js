@@ -1,12 +1,12 @@
-const CACHE_VERSION = "202508111848";
+const CACHE_VERSION = "202508111927";
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const PRECACHE_URLS = [
   "/index.html",
   "/index.css",
+  "/d3.v7.min.js",
   "/index.js",
   "/icon.png",
   "/icon.svg",
-  "https://d3js.org/d3.v7.min.js"
 ];
 
 self.addEventListener("install", event => {
