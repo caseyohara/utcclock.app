@@ -1,11 +1,12 @@
 let now = new Date()
 
 // Sets the refresh rate for updating `now`.
-// A refresh rate of 500 means the clock will be accurate within +/- a half second.
-// A rate less than 1000 does not increase the tick frequency of the clock;
-// the second hand will still move once per second, but it increases the frequency
-// with which the clock syncs its local time with system time, making it more accurate.
-const refreshRate = 250 // milliseconds
+// A refresh rate of 500 ms means it will sync its local time with system time
+// twice per second, making it accurate within +/- a half second.
+// Smaller refresh rates increase accuracy and apparent tick rate.
+// Frequency should be a power of 2.
+const frequency = 2 ** 3 // Hz; oscillations per second
+const refreshRate = 1000 / frequency // milliseconds
 
 const tzName = date => {
   return Intl.DateTimeFormat("default", { timeZoneName: "long" }).formatToParts(date).find(part => part.type === "timeZoneName").value
@@ -155,8 +156,8 @@ function ready() {
     dateData[0].value = now.getDate()
     timeData[0].value = now.getUTCHours() + now.getUTCMinutes() / 60
     timeData[1].value = (now.getHours() % 12) + now.getMinutes() / 60
-    timeData[2].value = now.getMinutes()
-    timeData[3].value = now.getSeconds()
+    timeData[2].value = now.getMinutes() + (now.getSeconds() / 60)
+    timeData[3].value = now.getSeconds() + (now.getMilliseconds() / 1000)
   }
 
   const vb = 512, // viewBox w & h
@@ -207,25 +208,21 @@ function ready() {
     {
       type: "utc",
       value: 0,
-      length: -utcHandLength,
       scale: twentyFour
     },
     {
       type: "hour",
       value: 0,
-      length: -hourHandLength,
       scale: twelve
     },
     {
       type: "minute",
       value: 0,
-      length: -minuteHandLength,
       scale: sixty
     },
     {
       type: "second",
       value: 0,
-      length: -secondHandLength,
       scale: sixty
     }
   ]
@@ -466,7 +463,6 @@ function ready() {
       .selectAll("g.hand-group")
       .data(timeData)
       .transition()
-      .ease(d3.easeElastic.period(0.5))
       .attr("transform", d => `rotate(${d.scale(d.value)})`)
 
     drawDigital()
