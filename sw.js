@@ -1,4 +1,4 @@
-const CACHE_VERSION = "202508111927";
+const CACHE_VERSION = "202511172124";
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const PRECACHE_URLS = [
   "/index.html",
